@@ -1,0 +1,15 @@
+# 忽略插件二进制目录（lazy.nvim 的插件存储位置）
+**/lazy/
+**/site/
+**/plugged/
+
+# 忽略 Neovim 运行时数据
+.local/
+.cache/
+.state/
+
+# 忽略临时文件
+*.swp
+*.swo
+*~
+.DS_Store
