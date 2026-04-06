@@ -1,56 +1,78 @@
-" ========== 插件管理器 ==========
+" ========== Vim 插件配置（與 Neovim 對應，70 個插件） ==========
 call plug#begin('~/.vim/plugged')
 
-" ========== 基础增强插件 ==========
-Plug 'preservim/nerdtree'
+" 主題與界面
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'
-Plug 'mbbill/undotree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-startify'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/conflict-marker.vim'
+
+" 代碼導航
+Plug 'preservim/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+
+" 編輯增強
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Yggdroot/indentLine'
 
-" ========== 主题 ==========
-Plug 'morhetz/gruvbox'
-
-" ========== Rust 开发 ==========
-Plug 'rust-lang/rust.vim'
+" LSP 與補全（coc.nvim）
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" ========== C/C++ 开发 ==========
-Plug 'bfrg/vim-cpp-modern'
-Plug 'preservim/tagbar'
-Plug 'vim-syntastic/syntastic'
+" 調試器
+Plug 'puremourning/vimspector'
 
-" ========== Swift 开发 ==========
-Plug 'keith/swift.vim'
+" 編程語言專用
+Plug 'bfrg/vim-cpp-modern'          " C/C++
+Plug 'rust-lang/rust.vim'           " Rust
+Plug 'keith/swift.vim'              " Swift
+Plug 'vim-lua/lua-vim'              " Lua
+Plug 'idbrii/vim-unityengine'       " C# / Unity
+Plug 'ziglang/zig.vim'              " Zig
+Plug 'artur-shaik/vim-javacomplete2' " Java
+Plug 'fatih/vim-go'                 " Go
+Plug 'pangloss/vim-javascript'      " JavaScript
+Plug 'maxmellon/vim-jsx-pretty'     " JSX/TSX
+Plug 'vlime/vlime'                  " Lisp
+Plug 'vim-python/python-syntax'     " Python
+Plug 'vim-ruby/vim-ruby'            " Ruby
 
-" ========== Python 开发 ==========
-Plug 'vim-python/python-syntax'
+" 遊戲引擎
+Plug 'drichardson/vim-unreal'       " Unreal Engine
+Plug 'shiena/godot-neovim'          " Godot
+Plug 'idbrii/vim-unityengine'       " Unity
 
-" ========== JavaScript 开发 ==========
-Plug 'pangloss/vim-javascript'
+" 數據庫
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
 
-" ========== Go 开发 ==========
-Plug 'fatih/vim-go'
+" 任務運行
+Plug 'tpope/vim-dispatch'
+Plug 'skywind3000/asyncrun.vim'
 
-" ========== Ruby 开发 ==========
-Plug 'vim-ruby/vim-ruby'
+" 快捷鍵提示
+Plug 'liuchengxu/vim-which-key'
 
-" ========== Java 开发 ==========
-Plug 'artur-shaik/vim-javacomplete2'
+" 單元測試
+Plug 'vim-test/vim-test'
+
+" tmux 導航
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
-" ========== 基本设置 ==========
+" ========== 基本設置 ==========
 set number
 set relativenumber
 set mouse=a
@@ -80,11 +102,11 @@ set termencoding=utf-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set ambiwidth=double
 
-" ========== 主题 ==========
+" ========== 主題 ==========
 colorscheme gruvbox
 let g:gruvbox_contrast_dark = 'hard'
 
-" ========== 快捷键 ==========
+" ========== 快捷鍵 ==========
 map <C-n> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
 map <C-f> :Rg<CR>
@@ -95,16 +117,16 @@ imap <C-s> <Esc>:w<CR>
 map <C-q> :q<CR>
 map <leader>h :nohlsearch<CR>
 
-" ========== NERDTree 设置 ==========
+" ========== NERDTree 設置 ==========
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.pyc$', '\.swp$', '\.DS_Store']
 
-" ========== Airline 设置 ==========
+" ========== Airline 設置 ==========
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'gruvbox'
 
-" ========== COC 补全 ==========
+" ========== COC 補全 ==========
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -130,7 +152,7 @@ function! ShowDocumentation()
   endif
 endfunction
 
-" ========== 语法检查 ==========
+" ========== 語法檢查 ==========
 let g:ale_linters = {
 \   'rust': ['cargo', 'analyzer'],
 \   'c': ['clang'],
@@ -139,9 +161,14 @@ let g:ale_linters = {
 \}
 let g:ale_fix_on_save = 1
 
-" ========== 语言专用设置 ==========
+" ========== 語言專用設置 ==========
 let g:rustfmt_autosave = 1
 let g:python_highlight_all = 1
 
-" ========== 文件类型 ==========
+" ========== 文件類型 ==========
 filetype plugin indent on
+
+" ========== 字體設置（僅對 GUI 生效，如 MacVim） ==========
+if has("gui_running")
+  set guifont=LXGW\ WenKai\ Mono\ GB:h12
+endif
