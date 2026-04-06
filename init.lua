@@ -66,17 +66,25 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    init = function()
+      vim.g.loaded_treesitter = true
+    end,
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "c", "cpp", "rust", "lua", "python", "go", "java", "javascript",
-          "typescript", "ruby", "swift", "cmake", "make", "bash", "vim", "vimdoc",
-          "glsl", "hlsl", "wgsl", "proto", "zig", "c_sharp", "lisp",
-        },
-        auto_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
+      local ok, treesitter = pcall(require, "nvim-treesitter.configs")
+      if ok then
+        treesitter.setup({
+          ensure_installed = {
+            "c", "cpp", "rust", "lua", "python", "go", "java", "javascript",
+            "typescript", "ruby", "swift", "cmake", "make", "bash", "vim", "vimdoc",
+            "glsl", "hlsl", "wgsl", "proto", "zig", "c_sharp", "lisp",
+          },
+          auto_install = true,
+          highlight = { enable = true },
+          indent = { enable = true },
+        })
+      else
+        vim.notify("Treesitter 尚未準備好，將在後續自動安裝", vim.log.levels.WARN)
+      end
     end,
   },
 
@@ -501,7 +509,9 @@ require("lazy").setup({
   -- 遠程開發
   {
     "chipsenkbeil/distant.nvim",
-    opts = {},
+    config = function()
+      require("distant"):setup()
+    end,
   },
   -- tmux 導航
   {
@@ -553,7 +563,7 @@ require("lazy").setup({
     "jbyuki/instant.nvim",
     config = function()
       require("instant").setup({
-        username = "指揮使",   -- 请替换为您喜欢的名称
+        username = "指揮使",
       })
     end,
   },
@@ -561,12 +571,12 @@ require("lazy").setup({
 })
 
 -- ==================== 3. 基礎編輯器設置 ====================
-vim.opt.number = true               -- 顯示行號
-vim.opt.relativenumber = true       -- 相對行號
-vim.opt.mouse = "a"                 -- 啟用鼠標
-vim.opt.tabstop = 4                 -- Tab 寬度
-vim.opt.shiftwidth = 4              -- 縮進寬度
-vim.opt.expandtab = true            -- 空格代替 Tab
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.mouse = "a"
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.hlsearch = true
@@ -577,7 +587,7 @@ vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
-vim.opt.clipboard = "unnamedplus"   -- 系統剪貼板
+vim.opt.clipboard = "unnamedplus"
 
 -- 中文顯示為等寬霞鶩文楷 GB（僅在 GUI 環境下設置）
 if vim.fn.has("gui_running") == 1 then

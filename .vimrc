@@ -1,4 +1,4 @@
-" ========== Vim 插件配置（與 Neovim 對應，70 個插件） ==========
+" ========== Vim 插件配置（與 Neovim 對應） ==========
 call plug#begin('~/.vim/plugged')
 
 " 主題與界面
@@ -34,19 +34,32 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'puremourning/vimspector'
 
 " 編程語言專用
-Plug 'bfrg/vim-cpp-modern'          " C/C++
-Plug 'rust-lang/rust.vim'           " Rust
-Plug 'keith/swift.vim'              " Swift
-Plug 'vim-lua/lua-vim'              " Lua
-Plug 'idbrii/vim-unityengine'       " C# / Unity
-Plug 'ziglang/zig.vim'              " Zig
-Plug 'artur-shaik/vim-javacomplete2' " Java
-Plug 'fatih/vim-go'                 " Go
-Plug 'pangloss/vim-javascript'      " JavaScript
-Plug 'maxmellon/vim-jsx-pretty'     " JSX/TSX
-Plug 'vlime/vlime'                  " Lisp
-Plug 'vim-python/python-syntax'     " Python
-Plug 'vim-ruby/vim-ruby'            " Ruby
+" C 語言（無單獨插件，使用 coc-clangd 即可）
+" C++ 語言
+Plug 'bfrg/vim-cpp-modern'          " C++ 語法增強
+" Rust
+Plug 'rust-lang/rust.vim'
+" Swift
+Plug 'keith/swift.vim'
+" Lua
+Plug 'vim-lua/lua-vim'
+" C#
+Plug 'idbrii/vim-unityengine'
+" Zig
+Plug 'ziglang/zig.vim'
+" Java
+Plug 'artur-shaik/vim-javacomplete2'
+" Go
+Plug 'fatih/vim-go'
+" JavaScript
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+" Lisp
+Plug 'vlime/vlime'
+" Python
+Plug 'vim-python/python-syntax'
+" Ruby
+Plug 'vim-ruby/vim-ruby'
 
 " 遊戲引擎
 Plug 'drichardson/vim-unreal'       " Unreal Engine
