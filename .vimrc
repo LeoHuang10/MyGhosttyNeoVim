@@ -1,5 +1,24 @@
 " ========== Vim 插件配置（與 Neovim 對應） ==========
-call plug#begin('~/.vim/plugged')
+
+" 自動檢測操作系統並設置路徑
+if has('win32') || has('win64')
+    let $VIMHOME = $HOME . '/vimfiles'
+else
+    let $VIMHOME = $HOME . '/.vim'
+endif
+
+" 確保 vim-plug 已安裝
+let s:plug_path = $VIMHOME . '/autoload/plug.vim'
+if empty(glob(s:plug_path))
+    if has('win32')
+        silent exec '!curl -fLo ' . s:plug_path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    else
+        silent exec '!curl -fLo ' . s:plug_path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    endif
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin($VIMHOME . '/plugged')
 
 " 主題與界面
 Plug 'morhetz/gruvbox'
@@ -48,7 +67,7 @@ Plug 'idbrii/vim-unityengine'
 " Zig
 Plug 'ziglang/zig.vim'
 " Java
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'neoclide/coc-java', {'do': 'npm install'}
 " Go
 Plug 'fatih/vim-go'
 " JavaScript
@@ -63,7 +82,7 @@ Plug 'vim-ruby/vim-ruby'
 
 " 遊戲引擎
 Plug 'drichardson/vim-unreal'       " Unreal Engine
-Plug 'shiena/godot-neovim'          " Godot
+Plug 'habamax/vim-godot'            " Godot
 Plug 'idbrii/vim-unityengine'       " Unity
 
 " 數據庫
@@ -82,6 +101,9 @@ Plug 'vim-test/vim-test'
 
 " tmux 導航
 Plug 'christoomey/vim-tmux-navigator'
+
+" 代碼格式化
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 
@@ -124,7 +146,6 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
 map <C-f> :Rg<CR>
 map <C-t> :TagbarToggle<CR>
-map <C-u> :UndotreeToggle<CR>
 map <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>
 map <C-q> :q<CR>
@@ -183,5 +204,9 @@ filetype plugin indent on
 
 " ========== 字體設置（僅對 GUI 生效，如 MacVim） ==========
 if has("gui_running")
-  set guifont=LXGW\ WenKai\ Mono\ GB:h12
+  if has("win32")
+    set guifont=LXGW_WenKai_Mono_GB:h12
+  else
+    set guifont=LXGW\ WenKai\ Mono\ GB:h12
+  endif
 endif
