@@ -14,3 +14,4 @@ Thumbs.db
 
 # 忽略備份目錄
 backup/
+.vim/plugged/
