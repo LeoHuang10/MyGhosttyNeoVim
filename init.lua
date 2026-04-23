@@ -44,13 +44,15 @@ require("lazy").setup({
 	},
 
 	-- 狀態欄（顯示 Git 分支、LSP 狀態等）
-	-- 關鍵修正：移除對 catppuccin/nvim 的依賴，直接使用 lualine 內置主題
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			options = { theme = "catppuccin" },
-		},
+		dependencies = { "nvim-tree/nvim-web-devicons", "catppuccin/nvim" },
+		lazy = false,
+		config = function()
+			require("lualine").setup({
+				options = { theme = "catppuccin" },
+			})
+		end,
 	},
 
 	-- ==================== 搜索與導航 ====================
@@ -121,7 +123,7 @@ require("lazy").setup({
 		end,
 	},
 
-	-- 管理全局和項目本地 LSP 配置（必須在所有 LSP 伺服器啟動前加載）
+	-- 管理全局和項目本地 LSP 配置（必須在所有 LSP 服務器啟動前加載）
 	{
 		"folke/neoconf.nvim",
 		priority = 900,
@@ -129,7 +131,7 @@ require("lazy").setup({
 		opts = {},
 	},
 
-	-- Mason 與 mason-lspconfig（用於安裝與管理 LSP 伺服器）
+	-- Mason 與 mason-lspconfig（用於安裝與管理 LSP 服務器）
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
@@ -601,6 +603,12 @@ require("lazy").setup({
 	{
 		"habamax/vim-godot",
 		ft = { "gd", "gdscript", "godot" },
+	},
+	-- Unity（自動同步 .csproj 文件，建議搭配 omnisharp 使用）
+	{
+		"apyra/nvim-unity-sync",
+		ft = "cs",
+		opts = {},
 	},
 
 	-- ==================== 編輯增強與工具 ====================
