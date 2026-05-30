@@ -604,7 +604,7 @@ require("lazy").setup({
 		"habamax/vim-godot",
 		ft = { "gd", "gdscript", "godot" },
 	},
-	-- Unity（自動同步 .csproj 文件，建議搭配 omnisharp 使用）
+	-- Unity (自動同步 .csproj 文件，建議搭配 omnisharp 使用)
 	{
 		"apyra/nvim-unity-sync",
 		ft = "cs",
@@ -1053,6 +1053,12 @@ require("lazy").setup({
 			{ "<leader>gs", "<cmd>Git<CR>", desc = "Git status" },
 			{ "<leader>gd", "<cmd>Gdiff<CR>", desc = "Git diff" },
 		},
+	},
+	-- Bevy Cargo.toml 依賴管理
+	{
+		"saecki/crates.nvim",
+		event = { "BufRead Cargo.toml" },
+		opts = {},
 	},
 })
 

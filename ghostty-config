@@ -1,0 +1,57 @@
+# --- 字體排版 ---
+font-family = "LXGW WenKai Mono GB"
+font-size = 12
+adjust-cell-height = 2
+
+# ---------- 主題 ----------
+# 暗色背景，白色/淺色文字，代碼彩色高亮
+theme = Catppuccin Mocha
+# 💡 新增下面几行，把普通文本和亮色文本都改成纯白
+# 这会直接覆盖主题默认调色板中的前景色和亮色前景色
+foreground = #FFFFFF
+palette = 15=#FFFFFF
+
+# --- 視窗與外觀 ---
+background-opacity = 0.85
+background-blur-radius = 30
+macos-titlebar-style = transparent
+window-padding-x = 10
+window-padding-y = 8
+window-save-state = always
+window-theme = auto
+
+# --- 光標 ---
+cursor-style = bar
+cursor-style-blink = true
+cursor-opacity = 0.8
+
+# --- 鼠標 ---
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+# --- 快速終端 ---
+quick-terminal-position = top
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.15
+
+# --- 安全 ---
+clipboard-paste-protection = true
+clipboard-paste-bracketed-safe = true
+
+# --- Shell 集成 ---
+shell-integration = zsh
+
+# --- Claude 專屬優化 ---
+# initial-command = /opt/homebrew/bin/claude
+initial-window = true
+quit-after-last-window-closed = true
+notify-on-command-finish = always
+
+# --- 性能 ---
+scrollback-limit = 25000000
+
+# --- 基礎分屏（左右添加屏幕）---
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+enter=toggle_split_zoom
+keybind = cmd+shift+f=toggle_split_zoom
