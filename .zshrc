@@ -137,6 +137,6 @@ alias unity-hub="open -a 'Unity Hub'"
 
 # Bevy 無需別名，進入項目目錄後使用 cargo run 即可
 
-# CryEngine 不支援 macOS，需通過虛擬機或雲端 Windows 使用
+# CryEngine 不支持 macOS，需通過虛擬機或雲端 Windows 使用
 # 若使用 Parallels Desktop 虛擬機，可選：
 # alias cry-vm="open -a 'Parallels Desktop'"
