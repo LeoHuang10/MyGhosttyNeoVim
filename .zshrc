@@ -123,7 +123,11 @@ eval "$(zoxide init zsh)"
 # ===== 遊戲引擎快捷命令 =====
 
 # Godot 編輯器
-alias godot-editor="/Applications/Godot.app/Contents/MacOS/Godot"
+# Godot GDScript 版
+alias godot-gd="/Applications/Godot.app/Contents/MacOS/Godot"
+
+# Godot C# 版（若實際名稱為 Godot_mono.app）
+alias godot-cs="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 
 # Unreal Engine 編輯器（根據實際安裝路徑修改版本號）
 alias ue-editor="open /Users/Shared/Epic\ Games/UE_5.6/Engine/Binaries/Mac/UnrealEditor.app"
