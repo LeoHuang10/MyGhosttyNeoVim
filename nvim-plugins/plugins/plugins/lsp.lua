@@ -1,7 +1,7 @@
 return {
   -- 管理語言服務器、格式化工具、調試器
   {
-    "mason-org/mason.nvim",
+    "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
         -- C/C++ 核心
@@ -21,7 +21,7 @@ return {
   },
   -- 自動將語言服務器與對應文件類型關聯
   {
-    "mason-org/mason-lspconfig.nvim",
+    "williamboman/mason-lspconfig.nvim",
     opts = {
       automatic_installation = true,
     },
