@@ -16,6 +16,8 @@ return {
         -- Python, TypeScript（工具鏈）
         "pyright",
         "typescript-language-server",
+        -- Docker 支持（新增）
+        "dockerfile-language-server",
       },
     },
   },
@@ -42,6 +44,8 @@ return {
           },
         },
         omnisharp = {},
+        -- 啟用 Dockerfile 語言服務器（新增）
+        docker_ls = {},
       },
     },
   },

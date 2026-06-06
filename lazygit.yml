@@ -1,14 +1,14 @@
 gui:
   theme:
     activeBorderColor:
-      - "#cba6f7"
+      - "#cba6f7"             # 使用中的面板边框颜色
       - "bold"
     inactiveBorderColor:
-      - "#585b70"
+      - "#585b70"             # 非使用中的面板边框颜色
     selectedLineBgColor:
-      - "#313244"
-  nerdFontsVersion: "3"
+      - "#313244"             # 选中行背景色
+  nerdFontsVersion: "3"       # 若使用 Nerd Font 图标则启用
 git:
   paging:
     colorArg: always
-    pager: delta --paging=never
+    pager: delta --paging=never   # 使用 delta 作为差异分页器
