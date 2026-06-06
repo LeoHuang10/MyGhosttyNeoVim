@@ -16,10 +16,10 @@ cp starship.toml ~/.config/
 mkdir -p ~/.config/nvim/lua/plugins
 cp -r nvim-plugins/* ~/.config/nvim/lua/plugins/
 
-# 5. 還原 Neovim 自動命令（若存在）
-if [ -f nvim-autocmds.lua ]; then
+# 5. 還原 Neovim 自定義配置（若存在）
+if [ -d nvim-config/config ]; then
     mkdir -p ~/.config/nvim/lua/config
-    cp nvim-autocmds.lua ~/.config/nvim/lua/config/autocmds.lua
+    cp -r nvim-config/config/* ~/.config/nvim/lua/config/
 fi
 
 # 6. 還原 tmux 配置（若存在）
