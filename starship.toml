@@ -1,6 +1,6 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+"$schema" = 'https://starship.rs/config-schema.json'  # 配置文件的語法校驗地址
 
-format = """
+format = """  # 提示符的完整佈局，定義各模塊的顯示順序和樣式
 [](red)\
 $os\
 $username\
@@ -26,16 +26,15 @@ $conda\
 $time\
 [ ](fg:lavender)\
 $cmd_duration\
-$line_break\
 $character"""
 
-palette = 'catppuccin_mocha'
+palette = 'catppuccin_mocha'  # 當前使用的 Catppuccin Mocha 配色方案
 
-[os]
+[os]  # 操作系統圖標
 disabled = false
 style = "bg:red fg:crust"
 
-[os.symbols]
+[os.symbols]  # 各操作系統對應的 Nerd Font 圖標
 Windows = ""
 Ubuntu = "󰕈"
 SUSE = ""
@@ -57,122 +56,121 @@ Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
-[username]
+[username]  # 當前用戶名顯示
 show_always = true
 style_user = "bg:red fg:crust"
 style_root = "bg:red fg:crust"
 format = '[ $user]($style)'
 
-[directory]
+[directory]  # 當前工作目錄
 style = "bg:peach fg:crust"
 format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
+truncation_length = 3  # 路徑超過 3 層後開始縮短
+truncation_symbol = "…/"  # 縮短時顯示的符號
 
-[directory.substitutions]
+[directory.substitutions]  # 常用目錄的名稱替換
 "Documents" = "󰈙 "
 "Downloads" = " "
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
 
-[git_branch]
-symbol = ""
+[git_branch]  # Git 分支名稱
+symbol = ""  # 分支圖標
 style = "bg:yellow"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 
-[git_status]
+[git_status]  # Git 工作區狀態（修改、暫存、領先/落後等）
 style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
 
-[nodejs]
+[nodejs]  # Node.js 版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[bun]
+[bun]  # Bun 運行時版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[c]
+[c]  # C 語言環境
 symbol = " "
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[rust]
+[rust]  # Rust 工具鏈版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[golang]
+[golang]  # Go 語言版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[php]
+[php]  # PHP 版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[java]
+[java]  # Java 版本
 symbol = " "
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[kotlin]
+[kotlin]  # Kotlin 版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[haskell]
+[haskell]  # Haskell 版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[python]
+[python]  # Python 虛擬環境及版本
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
 
-[docker_context]
+[docker_context]  # Docker 上下文
 symbol = ""
 style = "bg:sapphire"
 format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
 
-[conda]
+[conda]  # Conda 環境
 symbol = "  "
 style = "fg:crust bg:sapphire"
 format = '[$symbol$environment ]($style)'
-ignore_base = false
+ignore_base = false  # 是否忽略 base 環境
 
-[time]
+[time]  # 當前時間
 disabled = false
-time_format = "%R"
+time_format = "%R"  # 24 小時制，如 "14:30"
 style = "bg:lavender"
 format = '[[  $time ](fg:crust bg:lavender)]($style)'
 
-[line_break]
-disabled = true
-
-[character]
+[character]  # 命令輸入前的提示符號（普通 Shell）
 disabled = false
-success_symbol = '[❯](bold fg:green)'
-error_symbol = '[❯](bold fg:red)'
-vimcmd_symbol = '[❮](bold fg:green)'
-vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
-vimcmd_replace_symbol = '[❮](bold fg:lavender)'
-vimcmd_visual_symbol = '[❮](bold fg:yellow)'
+success_symbol = '[❯](bold fg:green)'  # 上條命令成功時的符號
+error_symbol = '[❯](bold fg:red)'  # 上條命令失敗時的符號
 
-[cmd_duration]
-show_milliseconds = true
+[vimcmd]  # Vim/Neovim 模式下的提示符號（取代舊版 [character] 中的 vimcmd_*）
+normal_symbol = '[❮](bold fg:green)'  # 普通模式的符號
+visual_symbol = '[❮](bold fg:yellow)'  # 可視模式的符號
+replace_symbol = '[❮](bold fg:lavender)'  # 替換模式的符號
+replace_one_symbol = '[❮](bold fg:lavender)'  # 單次替換模式的符號
+
+[cmd_duration]  # 命令執行耗時
+show_milliseconds = true  # 顯示毫秒
 format = " in $duration "
 style = "bg:lavender"
 disabled = false
-show_notifications = true
-min_time_to_notify = 45000
+show_notifications = true  # 對耗時過長命令發送系統通知
+min_time_to_notify = 45000  # 觸發通知的最小耗時（毫秒）
 
-[palettes.catppuccin_mocha]
+[palettes.catppuccin_mocha]  # Catppuccin Mocha 配色（暗色主題）
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
 pink = "#f5c2e7"
@@ -200,7 +198,7 @@ base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
 
-[palettes.catppuccin_frappe]
+[palettes.catppuccin_frappe]  # Catppuccin Frappe 配色（稍亮）
 rosewater = "#f2d5cf"
 flamingo = "#eebebe"
 pink = "#f4b8e4"
@@ -228,7 +226,7 @@ base = "#303446"
 mantle = "#292c3c"
 crust = "#232634"
 
-[palettes.catppuccin_latte]
+[palettes.catppuccin_latte]  # Catppuccin Latte 配色（亮色主題）
 rosewater = "#dc8a78"
 flamingo = "#dd7878"
 pink = "#ea76cb"
@@ -256,7 +254,7 @@ base = "#eff1f5"
 mantle = "#e6e9ef"
 crust = "#dce0e8"
 
-[palettes.catppuccin_macchiato]
+[palettes.catppuccin_macchiato]  # Catppuccin Macchiato 配色（中等亮度）
 rosewater = "#f4dbd6"
 flamingo = "#f0c6c6"
 pink = "#f5bde6"
