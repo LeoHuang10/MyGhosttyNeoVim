@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions)   #啟用插件
 
 source $ZSH/oh-my-zsh.sh
 
@@ -119,6 +119,24 @@ ZSH_HIGHLIGHT_STYLES[incorrect-command]='fg=white'
 # zoxide 智能目錄跳轉（替代 cd，自動學習常用目錄）
 eval "$(zoxide init zsh)"
 
+# 歷史記錄優化
+setopt HIST_IGNORE_ALL_DUPS      # 忽略連續重複的命令
+setopt HIST_SAVE_NO_DUPS         # 存檔時去除重複命令
+setopt SHARE_HISTORY             # 跨終端會話共享歷史
+export HISTSIZE=50000            # 內存中歷史記錄數量
+export SAVEHIST=50000            # 存檔的歷史記錄數量
+
+
+# direnv 自動加載項目環境變量
+eval "$(direnv hook zsh)"
+
+# Lazygit 別名
+alias lg='lazygit'              # 快速啟動 Lazygit
+
+# thefuck 命令糾錯
+eval "$(thefuck --alias fix)"    # 輸錯命令後輸入 fix 自動修正
+
+
 
 # ===== 遊戲引擎快捷命令 =====
 
@@ -140,3 +158,9 @@ alias unity-hub="open -a 'Unity Hub'"
 # CryEngine 不支持 macOS，需通過虛擬機或雲端 Windows 使用
 # 若使用 Parallels Desktop 虛擬機，可選：
 # alias cry-vm="open -a 'Parallels Desktop'"
+
+# ===== 終端標題動態更新 =====
+# 每次顯示提示符前，將 Ghostty 標籤頁標題設為當前目錄
+function precmd() {
+  echo -ne "\033]0;${PWD/#$HOME/~}\007"
+}
