@@ -1,6 +1,8 @@
-"$schema" = 'https://starship.rs/config-schema.json'  # 配置文件的語法校驗地址
+"$schema" = 'https://starship.rs/config-schema.json'
 
-format = """  # 提示符的完整佈局，定義各模塊的顯示順序和樣式
+command_timeout = 1000
+
+format = """
 [](red)\
 $os\
 $username\
@@ -9,18 +11,54 @@ $directory\
 [](bg:yellow fg:peach)\
 $git_branch\
 $git_status\
-[](fg:yellow bg:green)\
+[](fg:yellow bg:blue)\
 $c\
+[](fg:blue bg:sapphire)\
+$cpp\
+[](fg:sapphire bg:maroon)\
 $rust\
+[](fg:maroon bg:peach)\
+$swift\
+[](fg:peach bg:blue)\
+$lua\
+[](fg:blue bg:yellow)\
+$zig\
+[](fg:yellow bg:mauve)\
+$dotnet\
+[](fg:mauve bg:sky)\
 $golang\
-$nodejs\
-$bun\
-$php\
+[](fg:sky bg:red)\
 $java\
-$kotlin\
-$haskell\
+[](fg:red bg:sapphire)\
 $python\
-[](fg:green bg:sapphire)\
+[](fg:sapphire bg:peach)\
+$lisp\
+[](fg:peach bg:maroon)\
+$common_lisp\
+[](fg:maroon bg:red)\
+$scheme\
+[](fg:red bg:green)\
+$nodejs\
+[](fg:green bg:peach)\
+$bun\
+[](fg:peach bg:lavender)\
+$php\
+[](fg:lavender bg:pink)\
+$kotlin\
+[](fg:pink bg:mauve)\
+$haskell\
+[](fg:mauve bg:sky)\
+$cryengine\
+[](fg:sky bg:blue)\
+$unreal\
+[](fg:blue bg:red)\
+$bevy\
+[](fg:red bg:sapphire)\
+$godot\
+[](fg:sapphire bg:lavender)\
+$unity\
+[](fg:lavender bg:sapphire)\
+$docker_context\
 $conda\
 [](fg:sapphire bg:lavender)\
 $time\
@@ -28,23 +66,19 @@ $time\
 $cmd_duration\
 $character"""
 
-palette = 'catppuccin_mocha'  # 當前使用的 Catppuccin Mocha 配色方案
+palette = 'catppuccin_mocha'
 
-[os]  # 操作系統圖標
+[os]
 disabled = false
 style = "bg:red fg:crust"
 
-[os.symbols]  # 各操作系統對應的 Nerd Font 圖標
-Windows = ""
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
+[os.symbols]
 Macos = "󰀵"
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
+FreeBSD = ""
+OpenBSD = ""
+NetBSD = ""
+DragonFly = ""
+Illumos = ""
 Alpine = ""
 Amazon = ""
 Android = ""
@@ -53,124 +87,208 @@ Arch = "󰣇"
 Artix = "󰣇"
 CentOS = ""
 Debian = "󰣚"
+Fedora = "󰣛"
+Gentoo = "󰣨"
+Linux = "󰌽"
+Manjaro = ""
+Mint = "󰣭"
+Raspbian = "󰐿"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
+SUSE = ""
+Ubuntu = "󰕈"
+Windows = ""
 
-[username]  # 當前用戶名顯示
+[username]
 show_always = true
 style_user = "bg:red fg:crust"
 style_root = "bg:red fg:crust"
 format = '[ $user]($style)'
 
-[directory]  # 當前工作目錄
+[directory]
 style = "bg:peach fg:crust"
 format = "[ $path ]($style)"
-truncation_length = 3  # 路徑超過 3 層後開始縮短
-truncation_symbol = "…/"  # 縮短時顯示的符號
+truncation_length = 3
+truncation_symbol = "…/"
 
-[directory.substitutions]  # 常用目錄的名稱替換
+[directory.substitutions]
 "Documents" = "󰈙 "
 "Downloads" = " "
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
 
-[git_branch]  # Git 分支名稱
-symbol = ""  # 分支圖標
+[git_branch]
+symbol = ""
 style = "bg:yellow"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 
-[git_status]  # Git 工作區狀態（修改、暫存、領先/落後等）
+[git_status]
 style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
 
-[nodejs]  # Node.js 版本
+[c]
+symbol = " "
+style = "bg:blue"
+format = '[[ $symbol( $version) ](fg:crust bg:blue)]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:sapphire"
+format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:maroon"
+format = '[[ $symbol( $version) ](fg:crust bg:maroon)]($style)'
+
+[swift]
+symbol = ""
+style = "bg:peach"
+format = '[[ $symbol( $version) ](fg:crust bg:peach)]($style)'
+
+[lua]
+symbol = " "
+style = "bg:blue"
+format = '[[ $symbol( $version) ](fg:crust bg:blue)]($style)'
+
+[zig]
+symbol = " "
+style = "bg:yellow"
+format = '[[ $symbol( $version) ](fg:crust bg:yellow)]($style)'
+
+[dotnet]
+symbol = " "
+style = "bg:mauve"
+format = '[[ $symbol( $version) ](fg:crust bg:mauve)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:sky"
+format = '[[ $symbol( $version) ](fg:crust bg:sky)]($style)'
+
+[java]
+symbol = " "
+style = "bg:red"
+format = '[[ $symbol( $version) ](fg:crust bg:red)]($style)'
+
+[python]
+symbol = ""
+style = "bg:sapphire"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:sapphire)]($style)'
+
+[custom.lisp]
+command = 'gcl --version 2>/dev/null | head -1 || clisp --version 2>/dev/null | head -1 || ecl --version 2>/dev/null | head -1'
+when = 'which gcl > /dev/null 2>&1 || which clisp > /dev/null 2>&1 || which ecl > /dev/null 2>&1'
+symbol = " "
+style = "bg:peach"
+format = '[[ $symbol( $output) ](fg:crust bg:peach)]($style)'
+
+[custom.common_lisp]
+command = 'sbcl --version 2>&1 | head -1'
+when = 'which sbcl > /dev/null 2>&1'
+symbol = " "
+style = "bg:maroon"
+format = '[[ $symbol CL( $output) ](fg:crust bg:maroon)]($style)'
+
+[custom.scheme]
+command = 'guile --version 2>/dev/null | head -1 || chicken -version 2>/dev/null | head -1 || mit-scheme --version 2>/dev/null | head -1'
+when = 'which guile > /dev/null 2>&1 || which chicken > /dev/null 2>&1 || which mit-scheme > /dev/null 2>&1'
+symbol = "λ "
+style = "bg:red"
+format = '[[ $symbol( $output) ](fg:crust bg:red)]($style)'
+
+[nodejs]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[bun]  # Bun 運行時版本
+[bun]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+style = "bg:peach"
+format = '[[ $symbol( $version) ](fg:crust bg:peach)]($style)'
 
-[c]  # C 語言環境
-symbol = " "
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[rust]  # Rust 工具鏈版本
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[golang]  # Go 語言版本
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[php]  # PHP 版本
+[php]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+style = "bg:lavender"
+format = '[[ $symbol( $version) ](fg:crust bg:lavender)]($style)'
 
-[java]  # Java 版本
-symbol = " "
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[kotlin]  # Kotlin 版本
+[kotlin]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+style = "bg:pink"
+format = '[[ $symbol( $version) ](fg:crust bg:pink)]($style)'
 
-[haskell]  # Haskell 版本
+[haskell]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+style = "bg:mauve"
+format = '[[ $symbol( $version) ](fg:crust bg:mauve)]($style)'
 
-[python]  # Python 虛擬環境及版本
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
+[custom.cryengine]
+command = 'ls *.cryproject 2>/dev/null | head -1'
+when = 'ls *.cryproject >/dev/null 2>&1'
+symbol = "󰑺 "
+style = "bg:sky"
+format = '[[ $symbol CryEngine ](fg:crust bg:sky)]($style)'
 
-[docker_context]  # Docker 上下文
+[custom.unreal]
+command = 'head -1 Engine/Build/Build.version 2>/dev/null'
+when = 'test -f Engine/Build/Build.version'
+symbol = "󰲋 "
+style = "bg:blue"
+format = '[[ $symbol Unreal( $output) ](fg:crust bg:blue)]($style)'
+
+[custom.bevy]
+command = 'grep bevy Cargo.toml 2>/dev/null | head -1'
+when = 'test -f Cargo.toml && grep -q bevy Cargo.toml 2>/dev/null'
+symbol = " "
+style = "bg:red"
+format = '[[ $symbol Bevy( $output) ](fg:crust bg:red)]($style)'
+
+[custom.godot]
+command = 'head -1 project.godot 2>/dev/null'
+when = 'test -f project.godot'
+symbol = " "
+style = "bg:sapphire"
+format = '[[ $symbol Godot( $output) ](fg:crust bg:sapphire)]($style)'
+
+[custom.unity]
+command = 'head -1 ProjectSettings/ProjectVersion.txt 2>/dev/null'
+when = 'test -f ProjectSettings/ProjectVersion.txt'
+symbol = "󰖐 "
+style = "bg:lavender"
+format = '[[ $symbol Unity( $output) ](fg:crust bg:lavender)]($style)'
+
+[docker_context]
 symbol = ""
 style = "bg:sapphire"
 format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
 
-[conda]  # Conda 環境
+[conda]
 symbol = "  "
 style = "fg:crust bg:sapphire"
 format = '[$symbol$environment ]($style)'
-ignore_base = false  # 是否忽略 base 環境
+ignore_base = false
 
-[time]  # 當前時間
+[time]
 disabled = false
-time_format = "%R"  # 24 小時制，如 "14:30"
+time_format = "%R"
 style = "bg:lavender"
 format = '[[  $time ](fg:crust bg:lavender)]($style)'
 
-[character]  # 命令輸入前的提示符號（普通 Shell）
+[character]
 disabled = false
-success_symbol = '[❯](bold fg:green)'  # 上條命令成功時的符號
-error_symbol = '[❯](bold fg:red)'  # 上條命令失敗時的符號
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
 
-[vimcmd]  # Vim/Neovim 模式下的提示符號（取代舊版 [character] 中的 vimcmd_*）
-normal_symbol = '[❮](bold fg:green)'  # 普通模式的符號
-visual_symbol = '[❮](bold fg:yellow)'  # 可視模式的符號
-replace_symbol = '[❮](bold fg:lavender)'  # 替換模式的符號
-replace_one_symbol = '[❮](bold fg:lavender)'  # 單次替換模式的符號
-
-[cmd_duration]  # 命令執行耗時
-show_milliseconds = true  # 顯示毫秒
+[cmd_duration]
+show_milliseconds = true
 format = " in $duration "
 style = "bg:lavender"
 disabled = false
-show_notifications = true  # 對耗時過長命令發送系統通知
-min_time_to_notify = 45000  # 觸發通知的最小耗時（毫秒）
+show_notifications = true
+min_time_to_notify = 45000
 
-[palettes.catppuccin_mocha]  # Catppuccin Mocha 配色（暗色主題）
+[palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
 pink = "#f5c2e7"
@@ -198,7 +316,7 @@ base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
 
-[palettes.catppuccin_frappe]  # Catppuccin Frappe 配色（稍亮）
+[palettes.catppuccin_frappe]
 rosewater = "#f2d5cf"
 flamingo = "#eebebe"
 pink = "#f4b8e4"
@@ -226,7 +344,7 @@ base = "#303446"
 mantle = "#292c3c"
 crust = "#232634"
 
-[palettes.catppuccin_latte]  # Catppuccin Latte 配色（亮色主題）
+[palettes.catppuccin_latte]
 rosewater = "#dc8a78"
 flamingo = "#dd7878"
 pink = "#ea76cb"
@@ -254,7 +372,7 @@ base = "#eff1f5"
 mantle = "#e6e9ef"
 crust = "#dce0e8"
 
-[palettes.catppuccin_macchiato]  # Catppuccin Macchiato 配色（中等亮度）
+[palettes.catppuccin_macchiato]
 rosewater = "#f4dbd6"
 flamingo = "#f0c6c6"
 pink = "#f5bde6"
