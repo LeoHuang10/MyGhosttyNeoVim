@@ -36,7 +36,7 @@ brew "lua-language-server"
 brew "make"
 brew "mono"
 brew "mysql"
-brew "mysql@8.0"
+brew "mysql@8.0", restart_service: :changed
 brew "neovim"
 brew "node"
 brew "postgresql@15"
