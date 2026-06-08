@@ -1,5 +1,5 @@
 # --- 字體排版 ---
-#普通文本和亮色文本都改成純白
+# 普通文本和亮色文本都改成純白
 font-family = "LXGW WenKai Mono GB"
 font-size = 12
 adjust-cell-height = 2
@@ -9,7 +9,7 @@ theme = Catppuccin Mocha
 foreground = #FFFFFF
 palette = 15=#FFFFFF
 
-# --- 視窗與外觀 ---
+# --- 窗口與外觀 ---
 background-opacity = 0.7
 background-blur-radius = 60
 macos-titlebar-style = transparent
@@ -42,7 +42,6 @@ clipboard-paste-bracketed-safe = true
 shell-integration = zsh
 
 # --- Claude 專屬優化 ---
-# initial-command = /opt/homebrew/bin/claude
 initial-window = true
 quit-after-last-window-closed = true
 notify-on-command-finish = always
@@ -70,9 +69,6 @@ keybind = cmd+0=reset_font_size
 
 # --- 補充打磨 ---
 # 將 Option 鍵映射為 Alt 鍵，避免在終端內輸出特殊字符，方便使用 Meta 快捷鍵
-macos-option-as-alt = true      # Option 鍵映射為 Alt，方便 Meta 快捷鍵
-# Ghostty 初次啟動時的視窗大小（若已有記憶的視窗狀態則以此為準）
-window-initial-width = 120                                                  # 初始窗口寬度
-window-initial-height = 40                                                  # 初始窗口高度
+macos-option-as-alt = true
 # 備用最大化當前分屏快捷鍵（功能與 cmd+shift+enter 相同）
-keybind = cmd+shift+m=toggle_split_zoom                                     # 備用最大化分屏快捷鍵
+keybind = cmd+shift+m=toggle_split_zoom
