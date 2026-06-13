@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions)   #啟用插件
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -140,6 +140,14 @@ eval "$(thefuck --alias fix)"    # 輸錯命令後輸入 fix 自動修正
 
 # ===== 遊戲引擎快捷命令 =====
 
+# CryEngine 虛擬機快捷啟動（需先安裝 Parallels Desktop）
+alias cry-vm="open -a 'Parallels Desktop'"
+
+# Unreal Engine 編輯器（自動識別最新版本，無需手動更新路徑）
+alias ue-editor='ls -d /Users/Shared/Epic\ Games/UE_* | sort -V | tail -1 | xargs -I{} open {}/Engine/Binaries/Mac/UnrealEditor.app'
+
+# Bevy 無需別名，進入項目目錄後使用 cargo run 即可
+
 # Godot 編輯器
 # Godot GDScript 版
 alias godot-gd="/Applications/Godot.app/Contents/MacOS/Godot"
@@ -147,20 +155,13 @@ alias godot-gd="/Applications/Godot.app/Contents/MacOS/Godot"
 # Godot C# 版（若實際名稱為 Godot_mono.app）
 alias godot-cs="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 
-# Unreal Engine 編輯器（根據實際安裝路徑修改版本號）
-alias ue-editor="open /Users/Shared/Epic\ Games/UE_5.6/Engine/Binaries/Mac/UnrealEditor.app"
-
 # Unity Hub（管理 Unity 項目與版本）
 alias unity-hub="open -a 'Unity Hub'"
 
-# Bevy 無需別名，進入項目目錄後使用 cargo run 即可
-
-# CryEngine 不支持 macOS，需通過虛擬機或雲端 Windows 使用
-# 若使用 Parallels Desktop 虛擬機，可選：
-# alias cry-vm="open -a 'Parallels Desktop'"
 
 # ===== 終端標題動態更新 =====
 # 每次顯示提示符前，將 Ghostty 標籤頁標題設為當前目錄
 function precmd() {
   echo -ne "\033]0;${PWD/#$HOME/~}\007"
 }
+export PATH="$HOME/.cargo/bin:$PATH"

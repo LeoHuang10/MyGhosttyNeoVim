@@ -1,7 +1,10 @@
+# 配置文件的語法校驗地址
 "$schema" = 'https://starship.rs/config-schema.json'
 
-command_timeout = 1000
+# 命令執行超時限制（毫秒）
+command_timeout = 2000
 
+# 提示符的完整佈局，定義各模塊的顯示順序和樣式
 format = """
 [](red)\
 $os\
@@ -22,15 +25,15 @@ $swift\
 [](fg:peach bg:blue)\
 $lua\
 [](fg:blue bg:yellow)\
-$zig\
-[](fg:yellow bg:mauve)\
 $dotnet\
-[](fg:mauve bg:sky)\
+[](fg:yellow bg:mauve)\
 $golang\
-[](fg:sky bg:red)\
+[](fg:mauve bg:sky)\
 $java\
-[](fg:red bg:sapphire)\
+[](fg:sky bg:red)\
 $python\
+[](fg:red bg:sapphire)\
+$zig\
 [](fg:sapphire bg:peach)\
 $lisp\
 [](fg:peach bg:maroon)\
@@ -66,7 +69,10 @@ $time\
 $cmd_duration\
 $character"""
 
+# 當前使用的 Catppuccin Mocha 配色方案
 palette = 'catppuccin_mocha'
+
+# ==================== 操作系統模塊 ====================
 
 [os]
 disabled = false
@@ -78,7 +84,7 @@ FreeBSD = ""
 OpenBSD = ""
 NetBSD = ""
 DragonFly = ""
-Illumos = ""
+Illumos = ""    # Illumos / Solaris 系統圖標
 Alpine = ""
 Amazon = ""
 Android = ""
@@ -99,11 +105,15 @@ SUSE = ""
 Ubuntu = "󰕈"
 Windows = ""
 
+# ==================== 用戶名模塊 ====================
+
 [username]
 show_always = true
 style_user = "bg:red fg:crust"
 style_root = "bg:red fg:crust"
 format = '[ $user]($style)'
+
+# ==================== 目錄模塊 ====================
 
 [directory]
 style = "bg:peach fg:crust"
@@ -118,6 +128,8 @@ truncation_symbol = "…/"
 "Pictures" = " "
 "Developer" = "󰲋 "
 
+# ==================== Git 模塊 ====================
+
 [git_branch]
 symbol = ""
 style = "bg:yellow"
@@ -126,6 +138,18 @@ format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 [git_status]
 style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
+
+# ==================== 編程語言模塊 ====================
+
+[nodejs]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[bun]
+symbol = ""
+style = "bg:peach"
+format = '[[ $symbol( $version) ](fg:crust bg:peach)]($style)'
 
 [c]
 symbol = " "
@@ -152,11 +176,6 @@ symbol = " "
 style = "bg:blue"
 format = '[[ $symbol( $version) ](fg:crust bg:blue)]($style)'
 
-[zig]
-symbol = " "
-style = "bg:yellow"
-format = '[[ $symbol( $version) ](fg:crust bg:yellow)]($style)'
-
 [dotnet]
 symbol = " "
 style = "bg:mauve"
@@ -167,15 +186,46 @@ symbol = ""
 style = "bg:sky"
 format = '[[ $symbol( $version) ](fg:crust bg:sky)]($style)'
 
+[php]
+symbol = ""
+style = "bg:lavender"
+format = '[[ $symbol( $version) ](fg:crust bg:lavender)]($style)'
+
 [java]
 symbol = " "
 style = "bg:red"
 format = '[[ $symbol( $version) ](fg:crust bg:red)]($style)'
 
+[kotlin]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol( $version) ](fg:crust bg:pink)]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:mauve"
+format = '[[ $symbol( $version) ](fg:crust bg:mauve)]($style)'
+
 [python]
 symbol = ""
 style = "bg:sapphire"
 format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:sapphire)]($style)'
+
+[zig]
+symbol = " "
+style = "bg:yellow"
+format = '[[ $symbol( $version) ](fg:crust bg:yellow)]($style)'
+
+# ==================== Solaris 自定義模塊 ====================
+
+[custom.solaris]
+command = 'echo ""'
+when = 'uname -s 2>/dev/null | grep -q SunOS'
+symbol = " "
+style = "bg:red fg:crust"
+format = '[$symbol Solaris]($style)'
+
+# ==================== Lisp 家族自定義模塊 ====================
 
 [custom.lisp]
 command = 'gcl --version 2>/dev/null | head -1 || clisp --version 2>/dev/null | head -1 || ecl --version 2>/dev/null | head -1'
@@ -198,30 +248,51 @@ symbol = "λ "
 style = "bg:red"
 format = '[[ $symbol( $output) ](fg:crust bg:red)]($style)'
 
-[nodejs]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+# ==================== Docker 模塊 ====================
 
-[bun]
-symbol = ""
-style = "bg:peach"
-format = '[[ $symbol( $version) ](fg:crust bg:peach)]($style)'
+[docker_context]
+symbol = ""
+style = "bg:sapphire"
+format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
 
-[php]
-symbol = ""
+# ==================== Conda 模塊 ====================
+
+[conda]
+symbol = "  "
+style = "fg:crust bg:sapphire"
+format = '[$symbol$environment ]($style)'
+ignore_base = false
+
+# ==================== 時間模塊 ====================
+
+[time]
+disabled = false
+time_format = "%R"
 style = "bg:lavender"
-format = '[[ $symbol( $version) ](fg:crust bg:lavender)]($style)'
+format = '[[  $time ](fg:crust bg:lavender)]($style)'
 
-[kotlin]
-symbol = ""
-style = "bg:pink"
-format = '[[ $symbol( $version) ](fg:crust bg:pink)]($style)'
+# ==================== 字符模塊（提示符號）====================
 
-[haskell]
-symbol = ""
-style = "bg:mauve"
-format = '[[ $symbol( $version) ](fg:crust bg:mauve)]($style)'
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
+vimcmd_replace_symbol = '[❮](bold fg:lavender)'
+vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
+
+# ==================== 命令耗時模塊 ====================
+
+[cmd_duration]
+show_milliseconds = true
+format = " in $duration "
+style = "bg:lavender"
+disabled = false
+show_notifications = true
+min_time_to_notify = 45000
+
+# ==================== 遊戲引擎自定義模塊 ====================
 
 [custom.cryengine]
 command = 'ls *.cryproject 2>/dev/null | head -1'
@@ -258,35 +329,7 @@ symbol = "󰖐 "
 style = "bg:lavender"
 format = '[[ $symbol Unity( $output) ](fg:crust bg:lavender)]($style)'
 
-[docker_context]
-symbol = ""
-style = "bg:sapphire"
-format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
-
-[conda]
-symbol = "  "
-style = "fg:crust bg:sapphire"
-format = '[$symbol$environment ]($style)'
-ignore_base = false
-
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:lavender"
-format = '[[  $time ](fg:crust bg:lavender)]($style)'
-
-[character]
-disabled = false
-success_symbol = '[❯](bold fg:green)'
-error_symbol = '[❯](bold fg:red)'
-
-[cmd_duration]
-show_milliseconds = true
-format = " in $duration "
-style = "bg:lavender"
-disabled = false
-show_notifications = true
-min_time_to_notify = 45000
+# ==================== 調色板 ====================
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
