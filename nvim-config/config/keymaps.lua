@@ -23,12 +23,14 @@ map("n", "<leader>gb", "<cmd>Git blame<CR>", { desc = "Git 追溯" })
 
 -- ==================== 編譯與運行 ====================
 
--- F5：一鍵運行當前文件
+-- F5：一鍵運行當前文件（Homebrew Clang）
 map("n", "<F5>", function()
   local ft = vim.bo.filetype
   local file = vim.fn.expand("%:p")
-  if ft == "c" or ft == "cpp" then
-    vim.cmd("!gcc " .. file .. " -o /tmp/a.out && /tmp/a.out")
+  if ft == "c" then
+    vim.cmd("!clang " .. file .. " -o /tmp/a.out && /tmp/a.out")
+  elseif ft == "cpp" then
+    vim.cmd("!clang++ " .. file .. " -o /tmp/a.out && /tmp/a.out")
   elseif ft == "rust" then
     vim.cmd("!cargo run")
   elseif ft == "python" then
@@ -54,14 +56,14 @@ map("n", "<F5>", function()
   end
 end, { desc = "一鍵運行 (F5)" })
 
--- F6：僅編譯不運行
+-- F6：僅編譯不運行（Homebrew Clang）
 map("n", "<F6>", function()
   local ft = vim.bo.filetype
   local file = vim.fn.expand("%:p")
   if ft == "c" then
-    vim.cmd("!gcc " .. file .. " -o /tmp/a.out -Wall -Wextra")
+    vim.cmd("!clang " .. file .. " -o /tmp/a.out -Wall -Wextra")
   elseif ft == "cpp" then
-    vim.cmd("!g++ " .. file .. " -o /tmp/a.out -Wall -Wextra -std=c++20")
+    vim.cmd("!clang++ " .. file .. " -o /tmp/a.out -Wall -Wextra -std=c++23")
   elseif ft == "rust" then
     vim.cmd("!cargo build")
   elseif ft == "go" then
@@ -74,6 +76,28 @@ map("n", "<F6>", function()
     print("此文件類型無需單獨編譯: " .. ft)
   end
 end, { desc = "一鍵編譯 (F6)" })
+
+-- F11：Apple Clang 編譯運行（macOS 商業項目驗證）
+map("n", "<F11>", function()
+  local ft = vim.bo.filetype
+  local file = vim.fn.expand("%:p")
+  if ft == "c" then
+    vim.cmd("!/usr/bin/clang " .. file .. " -o /tmp/a.out && /tmp/a.out")
+  elseif ft == "cpp" then
+    vim.cmd("!/usr/bin/clang++ " .. file .. " -o /tmp/a.out && /tmp/a.out")
+  end
+end, { desc = "Apple Clang 編譯運行 (F11)" })
+
+-- F12：GCC 編譯運行（Linux 部署驗證）
+map("n", "<F12>", function()
+  local ft = vim.bo.filetype
+  local file = vim.fn.expand("%:p")
+  if ft == "c" then
+    vim.cmd("!gcc-16 " .. file .. " -o /tmp/a.out && /tmp/a.out")
+  elseif ft == "cpp" then
+    vim.cmd("!g++-16 " .. file .. " -o /tmp/a.out && /tmp/a.out")
+  end
+end, { desc = "GCC 編譯運行 (F12)" })
 
 -- F7：調試繼續
 map("n", "<F7>", function()
