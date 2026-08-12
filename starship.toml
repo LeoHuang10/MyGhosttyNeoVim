@@ -18,22 +18,24 @@ $git_status\
 $c\
 [](fg:blue bg:sapphire)\
 $cpp\
-[](fg:sapphire bg:maroon)\
+[](fg:sapphire bg:mauve)\
+$c3\
+[](fg:mauve bg:maroon)\
 $rust\
 [](fg:maroon bg:peach)\
 $swift\
-[](fg:peach bg:blue)\
-$lua\
-[](fg:blue bg:yellow)\
-$dotnet\
-[](fg:yellow bg:mauve)\
-$golang\
-[](fg:mauve bg:sky)\
-$java\
-[](fg:sky bg:red)\
-$python\
-[](fg:red bg:sapphire)\
+[](fg:peach bg:yellow)\
 $zig\
+[](fg:yellow bg:blue)\
+$lua\
+[](fg:blue bg:mauve)\
+$dotnet\
+[](fg:mauve bg:sky)\
+$golang\
+[](fg:sky bg:red)\
+$java\
+[](fg:red bg:sapphire)\
+$python\
 [](fg:sapphire bg:peach)\
 $lisp\
 [](fg:peach bg:maroon)\
@@ -161,6 +163,14 @@ symbol = " "
 style = "bg:sapphire"
 format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
 
+# C3 語言（自定義模塊，使用 mauve 匹配官方 Logo 藍紫漸變）
+[custom.c3]
+command = 'c3c --version 2>/dev/null | head -1'
+when = 'which c3c > /dev/null 2>&1'
+symbol = "C3 "
+style = "bg:mauve"
+format = '[[ $symbol( $output) ](fg:crust bg:mauve)]($style)'
+
 [rust]
 symbol = ""
 style = "bg:maroon"
@@ -170,6 +180,11 @@ format = '[[ $symbol( $version) ](fg:crust bg:maroon)]($style)'
 symbol = ""
 style = "bg:peach"
 format = '[[ $symbol( $version) ](fg:crust bg:peach)]($style)'
+
+[zig]
+symbol = " "
+style = "bg:yellow"
+format = '[[ $symbol( $version) ](fg:crust bg:yellow)]($style)'
 
 [lua]
 symbol = " "
@@ -210,11 +225,6 @@ format = '[[ $symbol( $version) ](fg:crust bg:mauve)]($style)'
 symbol = ""
 style = "bg:sapphire"
 format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:sapphire)]($style)'
-
-[zig]
-symbol = " "
-style = "bg:yellow"
-format = '[[ $symbol( $version) ](fg:crust bg:yellow)]($style)'
 
 # ==================== Solaris 自定義模塊 ====================
 
