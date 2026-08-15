@@ -4,7 +4,9 @@
 # 命令執行超時限制（毫秒）
 command_timeout = 2000
 
-# 提示符的完整佈局，定義各模塊的顯示順序和樣式
+# 當前使用的 Catppuccin Mocha 配色方案
+palette = 'catppuccin_mocha'
+
 format = """
 [](red)\
 $os\
@@ -71,9 +73,6 @@ $time\
 $cmd_duration\
 $character"""
 
-# 當前使用的 Catppuccin Mocha 配色方案
-palette = 'catppuccin_mocha'
-
 # ==================== 操作系統模塊 ====================
 
 [os]
@@ -86,7 +85,7 @@ FreeBSD = ""
 OpenBSD = ""
 NetBSD = ""
 DragonFly = ""
-Illumos = ""    # Illumos / Solaris 系統圖標
+Illumos = ""
 Alpine = ""
 Amazon = ""
 Android = ""
@@ -159,7 +158,7 @@ style = "bg:blue"
 format = '[[ $symbol( $version) ](fg:crust bg:blue)]($style)'
 
 [cpp]
-symbol = " "
+symbol = " "
 style = "bg:sapphire"
 format = '[[ $symbol( $version) ](fg:crust bg:sapphire)]($style)'
 

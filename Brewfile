@@ -12,6 +12,10 @@ brew "bat"
 brew "bear"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Next-gen compiler infrastructure
+brew "llvm"
+# Compiler for the C3 language
+brew "c3c"
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
 brew "clang-format"
 # Cross-platform make
@@ -24,12 +28,12 @@ brew "direnv"
 brew "dotnet"
 # Modern, maintained replacement for ls
 brew "eza"
-# Powerful, lightweight programming language
-brew "lua"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
 # Command-line outline and bitmap font editor/converter
 brew "fontforge"
 # Command-line fuzzy finder written in Go
@@ -64,8 +68,8 @@ brew "jdtls"
 brew "jq"
 # Simple terminal UI for git commands
 brew "lazygit"
-# Next-gen compiler infrastructure
-brew "llvm"
+# Powerful, lightweight programming language
+brew "lua"
 # Language Server for the Lua language
 brew "lua-language-server"
 # Utility for directing compilation
@@ -75,7 +79,7 @@ brew "mono"
 # Open source relational database management system
 brew "mysql"
 # Open source relational database management system
-brew "mysql@8.0", restart_service: :changed
+brew "mysql@8.0"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Open-source, cross-platform JavaScript runtime environment
@@ -93,7 +97,7 @@ brew "redis"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Powerful, clean, object-oriented scripting language
-brew "ruby", link: false
+brew "ruby"
 # Safe, concurrent, practical language
 brew "rust"
 # Steel Bank Common Lisp system
@@ -152,6 +156,7 @@ cask "font-iansui"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-lxgw-wenkai"
 cask "font-lxgw-wenkai-gb"
+cask "font-meslo-lg-nerd-font"
 cask "font-sarasa-gothic"
 cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration

@@ -165,3 +165,6 @@ function precmd() {
   echo -ne "\033]0;${PWD/#$HOME/~}\007"
 }
 export PATH="$HOME/.cargo/bin:$PATH"
+alias unity-intl="open -a 'Unity Hub International Version'"    # Unity Hub 國際版
+
+[ -f "/Users/huangshaoshuai/.ghcup/env" ] && . "/Users/huangshaoshuai/.ghcup/env" # ghcup-env

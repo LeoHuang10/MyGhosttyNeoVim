@@ -1,7 +1,7 @@
 # --- 字體排版 ---
 # 普通文本和亮色文本都改成純白
 font-family = "LXGW WenKai Mono GB"
-font-size = 12
+font-size = 15
 adjust-cell-height = 2
 
 # ---------- 主題 ----------

@@ -1,0 +1,7 @@
+keybinds {
+    normal {
+        bind "Ctrl n" { NewPane; }          # 新面板
+        bind "Ctrl d" { NewPane "down"; }   # 下方新面板
+        bind "Ctrl r" { NewPane "right"; }  # 右方新面板
+    }
+}
