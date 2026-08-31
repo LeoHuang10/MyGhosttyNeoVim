@@ -1,3 +1,6 @@
+tap "asmvik/formulae"
+tap "d12frosted/emacs-plus", trusted: true
+tap "nikitabobko/tap"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Interpreted, interactive, object-oriented programming language
@@ -12,8 +15,6 @@ brew "bat"
 brew "bear"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
-# Next-gen compiler infrastructure
-brew "llvm"
 # Compiler for the C3 language
 brew "c3c"
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
@@ -34,6 +35,8 @@ brew "fastfetch"
 brew "fd"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Plugin manager for the Fish shell
+brew "fisher"
 # Command-line outline and bitmap font editor/converter
 brew "fontforge"
 # Command-line fuzzy finder written in Go
@@ -68,6 +71,8 @@ brew "jdtls"
 brew "jq"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Next-gen compiler infrastructure
+brew "llvm"
 # Powerful, lightweight programming language
 brew "lua"
 # Language Server for the Lua language
@@ -82,6 +87,8 @@ brew "mysql"
 brew "mysql@8.0"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Small build system for use with gyp or CMake
+brew "ninja"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # Object-relational database system
@@ -142,6 +149,14 @@ brew "zoxide"
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+# Simple hotkey-daemon for macOS.
+brew "asmvik/formulae/skhd", trusted: true
+# A tiling window manager for macOS based on binary space partitioning.
+brew "asmvik/formulae/yabai", trusted: true
+# GNU Emacs text editor
+brew "d12frosted/emacs-plus/emacs-plus@30", trusted: true
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "nikitabobko/tap/aerospace", trusted: true
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Terminal-based AI coding assistant
