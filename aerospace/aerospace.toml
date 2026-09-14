@@ -1,187 +1,288 @@
-# AeroSpace 配置文件
+# AeroSpace configuration
+# AeroSpace 配置
 
-# 配置版本
 config-version = 2
 
-# AeroSpace 啟動後執行的命令
-after-startup-command = []
+# Start AeroSpace automatically when macOS logs in
+# 登錄 macOS 時自動啟動 AeroSpace
+start-at-login = true
 
-# 登錄時自動啟動 AeroSpace
-start-at-login = false
+# Reload this configuration automatically after changes
+# 配置修改後自動重新載入
+auto-reload-config = true
 
-# 保存配置文件後自動重新載入
-auto-reload-config = false
-
-# 容器標準化
+# Normalize the window tree
+# 規範化窗口樹
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-# 窗口布局
-accordion-padding = 30
+# Default tiling layout and orientation
+# 默認平鋪布局與方向
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
-# 焦點切換顯示器時移動鼠標
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# Accordion padding
+# 手風琴布局內邊距
+accordion-padding = 30
 
-# 自動取消 macOS 隱藏應用狀態
-automatically-unhide-macos-hidden-apps = false
-
-# 保持空工作區
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B",
-                         "C", "D", "E", "F", "G", "I", "M", "N", "O", "P", "Q",
-                         "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-
-# 模式切換回調
-on-mode-changed = []
-
-# 鼠標跟隨焦點
+# Disable focus following mouse
+# 禁用鼠標跟隨焦點
 focus-follows-mouse.enabled = false
 
-# 鍵盤布局
+# Center mouse when changing monitor
+# 切換顯示器時將鼠標移動到中央
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Automatically unhide macOS hidden applications
+# 自動取消隱藏 macOS 隱藏應用程序
+automatically-unhide-macos-hidden-apps = true
+
+# Use QWERTY keyboard mapping
+# 使用 QWERTY 鍵盤映射
 key-mapping.preset = 'qwerty'
 
-# 窗口間距
-gaps.inner.horizontal = 0
-gaps.inner.vertical = 0
-gaps.outer.left = 0
-gaps.outer.bottom = 0
-gaps.outer.top = 0
-gaps.outer.right = 0
+# Keep all ten workspaces permanently available
+# 始終保留 10 個持久工作區
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
-# 主模式
+# Apply application-to-workspace rules to newly detected windows
+# 將應用程序與工作區規則應用於新檢測到的窗口
+on-window-detected = [
+    # Workspace 1 — Browsers
+    # 工作區 1 — 瀏覽器
+    {
+        if = 'test %{app-bundle-id} = com.apple.Safari',
+        run = 'move-node-to-workspace 1',
+    },
+    {
+        if = 'test %{app-bundle-id} = org.mozilla.firefox',
+        run = 'move-node-to-workspace 1',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.google.Chrome',
+        run = 'move-node-to-workspace 1',
+    },
+
+    # Workspace 2 — Terminal
+    # 工作區 2 — 終端
+    {
+        if = 'test %{app-bundle-id} = com.mitchellh.ghostty',
+        run = 'move-node-to-workspace 2',
+    },
+    {
+        if = 'test %{app-bundle-id} = net.kovidgoyal.kitty',
+        run = 'move-node-to-workspace 2',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.github.wez.wezterm',
+        run = 'move-node-to-workspace 2',
+    },
+    {
+        if = 'test %{app-bundle-id} = org.alacritty',
+        run = 'move-node-to-workspace 2',
+    },
+
+    # Workspace 3 — Development
+    # 工作區 3 — 開發
+    {
+        if = 'test %{app-bundle-id} = com.neovide.neovide',
+        run = 'move-node-to-workspace 3',
+    },
+    {
+        if = 'test %{app-bundle-id} = org.gnu.Emacs',
+        run = 'move-node-to-workspace 3',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.apple.dt.Xcode',
+        run = 'move-node-to-workspace 3',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.jetbrains.air',
+        run = 'move-node-to-workspace 3',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.jetbrains.rider',
+        run = 'move-node-to-workspace 3',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.microsoft.VSCode',
+        run = 'move-node-to-workspace 3',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.microsoft.visual-studio-preview',
+        run = 'move-node-to-workspace 3',
+    },
+
+    # Workspace 4 — AI
+    # 工作區 4 — AI
+    {
+        if = 'test %{app-bundle-id} = com.anthropic.claudefordesktop',
+        run = 'move-node-to-workspace 4',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.google.GeminiMacOS',
+        run = 'move-node-to-workspace 4',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.openai.codex',
+        run = 'move-node-to-workspace 4',
+    },
+
+    # Workspace 5 — Graphics / Game Development
+    # 工作區 5 — 圖形 / 遊戲開發
+    {
+        if = 'test %{app-bundle-id} = com.unity3d.unityhub',
+        run = 'move-node-to-workspace 5',
+    },
+    {
+        if = 'test %{app-bundle-id} = org.godotengine.godot',
+        run = 'move-node-to-workspace 5',
+    },
+    {
+        if = 'test %{app-bundle-id} = org.blenderfoundation.blender',
+        run = 'move-node-to-workspace 5',
+    },
+
+    # Workspace 6 — File Management
+    # 工作區 6 — 文件管理
+    {
+        if = 'test %{app-bundle-id} = com.apple.finder',
+        run = 'move-node-to-workspace 6',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.parallels.desktop.console',
+        run = 'move-node-to-workspace 6',
+    },
+    {
+        if = 'test %{app-bundle-id} = org.virtualbox.app.VirtualBox',
+        run = 'move-node-to-workspace 6',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.liguangming.Shadowrocket',
+        run = 'move-node-to-workspace 6',
+    },
+
+    # Workspace 7 — Development Collaboration / Project Management
+    # 工作區 7 — 開發協作 / 項目管理
+    {
+        if = 'test %{app-bundle-id} = com.github.GitHubClient',
+        run = 'move-node-to-workspace 7',
+    },
+
+    # Workspace 8 — Development / Engineering Tools
+    # 工作區 8 — 開發 / 工程工具
+    {
+        if = 'test %{app-bundle-id} = com.apple.dt.Instruments',
+        run = 'move-node-to-workspace 8',
+    },
+]
+
+# Window gaps
+# 窗口間距
+[gaps]
+inner.horizontal = 6
+inner.vertical = 6
+
+# No AeroSpace-added outer gaps
+# 不添加 AeroSpace 外部間距
+outer.left = 0
+outer.right = 0
+outer.top = 0
+outer.bottom = 0
+
+# Main key bindings
+# 主模式快捷鍵
 [mode.main.binding]
 
-    # 布局切換
-    alt-slash = 'layout tiles horizontal vertical'
-    alt-comma = 'layout accordion horizontal vertical'
+# Workspace switching
+# 工作區切換
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
 
-    # 焦點切換
-    alt-h = 'focus left'
-    alt-j = 'focus down'
-    alt-k = 'focus up'
-    alt-l = 'focus right'
+# Move focused window to workspace
+# 將當前窗口移動到指定工作區
+cmd-shift-1 = 'move-node-to-workspace 1'
+cmd-shift-2 = 'move-node-to-workspace 2'
+cmd-shift-3 = 'move-node-to-workspace 3'
+cmd-shift-4 = 'move-node-to-workspace 4'
+cmd-shift-5 = 'move-node-to-workspace 5'
+cmd-shift-6 = 'move-node-to-workspace 6'
 
-    # 移動窗口
-    alt-shift-h = 'move left'
-    alt-shift-j = 'move down'
-    alt-shift-k = 'move up'
-    alt-shift-l = 'move right'
+# Focus window by direction
+# 按方向切換窗口焦點
+cmd-h = 'focus left'
+cmd-j = 'focus down'
+cmd-k = 'focus up'
+cmd-l = 'focus right'
 
-    # 調整窗口大小
-    alt-minus = 'resize smart -50'
-    alt-equal = 'resize smart +50'
+# Move window by direction
+# 按方向移動窗口
+cmd-shift-h = 'move left'
+cmd-shift-j = 'move down'
+cmd-shift-k = 'move up'
+cmd-shift-l = 'move right'
 
-    # 切換工作區
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
-    alt-a = 'workspace A'
-    alt-b = 'workspace B'
-    alt-c = 'workspace C'
-    alt-d = 'workspace D'
-    alt-e = 'workspace E'
-    alt-f = 'workspace F'
-    alt-g = 'workspace G'
-    alt-i = 'workspace I'
-    alt-m = 'workspace M'
-    alt-n = 'workspace N'
-    alt-o = 'workspace O'
-    alt-p = 'workspace P'
-    alt-q = 'workspace Q'
-    alt-r = 'workspace R'
-    alt-s = 'workspace S'
-    alt-t = 'workspace T'
-    alt-u = 'workspace U'
-    alt-v = 'workspace V'
-    alt-w = 'workspace W'
-    alt-x = 'workspace X'
-    alt-y = 'workspace Y'
-    alt-z = 'workspace Z'
+# Toggle between current and previous workspace
+# 在當前與上一個工作區之間切換
+cmd-tab = 'workspace-back-and-forth'
 
-    # 將窗口移動到工作區
-    alt-shift-1 = 'move-node-to-workspace 1'
-    alt-shift-2 = 'move-node-to-workspace 2'
-    alt-shift-3 = 'move-node-to-workspace 3'
-    alt-shift-4 = 'move-node-to-workspace 4'
-    alt-shift-5 = 'move-node-to-workspace 5'
-    alt-shift-6 = 'move-node-to-workspace 6'
-    alt-shift-7 = 'move-node-to-workspace 7'
-    alt-shift-8 = 'move-node-to-workspace 8'
-    alt-shift-9 = 'move-node-to-workspace 9'
-    alt-shift-a = 'move-node-to-workspace A'
-    alt-shift-b = 'move-node-to-workspace B'
-    alt-shift-c = 'move-node-to-workspace C'
-    alt-shift-d = 'move-node-to-workspace D'
-    alt-shift-e = 'move-node-to-workspace E'
-    alt-shift-f = 'move-node-to-workspace F'
-    alt-shift-g = 'move-node-to-workspace G'
-    alt-shift-i = 'move-node-to-workspace I'
-    alt-shift-m = 'move-node-to-workspace M'
-    alt-shift-n = 'move-node-to-workspace N'
-    alt-shift-o = 'move-node-to-workspace O'
-    alt-shift-p = 'move-node-to-workspace P'
-    alt-shift-q = 'move-node-to-workspace Q'
-    alt-shift-r = 'move-node-to-workspace R'
-    alt-shift-s = 'move-node-to-workspace S'
-    alt-shift-t = 'move-node-to-workspace T'
-    alt-shift-u = 'move-node-to-workspace U'
-    alt-shift-v = 'move-node-to-workspace V'
-    alt-shift-w = 'move-node-to-workspace W'
-    alt-shift-x = 'move-node-to-workspace X'
-    alt-shift-y = 'move-node-to-workspace Y'
-    alt-shift-z = 'move-node-to-workspace Z'
+# Open Ghostty
+# 打開 Ghostty
+cmd-enter = 'exec-and-forget open -na /Applications/Ghostty.app'
 
-    # 工作區來回切換
-    alt-tab = 'workspace-back-and-forth'
+# Quick terminal
+# 快速終端
+cmd-shift-enter = 'exec-and-forget ~/Scripts/qtb.sh'
 
-    # 工作區移動到下一個顯示器
-    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+# Open clipboard content with mpv
+# 使用 mpv 打開剪貼板內容
+cmd-m = 'exec-and-forget open -na /Applications/mpv.app -- "$(pbpaste)"'
 
-    # 服務模式
-    alt-shift-semicolon = 'mode service'
+# Resize windows
+# 調整窗口大小
+cmd-minus = 'resize smart -50'
+cmd-equal = 'resize smart +50'
 
+# Switch between tiling orientations
+# 切換平鋪方向
+cmd-slash = 'layout tiles horizontal vertical'
+
+# Switch to accordion layout
+# 切換手風琴布局
+cmd-comma = 'layout accordion horizontal vertical'
+
+# Enter service mode
+# 進入服務模式
+cmd-shift-semicolon = 'mode service'
+
+
+# Service mode
 # 服務模式
 [mode.service.binding]
 
-    # 返回主模式
-    esc = ['reload-config', 'mode main']
+# Return to main mode
+# 返回主模式
+esc = ['reload-config', 'mode main']
 
-    # 重置工作區布局
-    r = ['flatten-workspace-tree', 'mode main']
+# Flatten workspace tree
+# 展平工作區窗口樹
+r = ['flatten-workspace-tree', 'mode main']
 
-    # 切換浮動與平鋪布局
-    f = ['layout floating tiling', 'mode main']
+# Toggle floating / tiling
+# 切換浮動 / 平鋪
+f = ['layout floating tiling', 'mode main']
 
-    # 關閉除當前窗口以外的所有窗口
-    backspace = ['close-all-windows-but-current', 'mode main']
+# Close all other windows
+# 關閉其他所有窗口
+backspace = ['close-all-windows-but-current', 'mode main']
 
-    # 合併窗口
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
-
-# 開發工具工作區分配
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'net.kovidgoyal.kitty'
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.rider'
-run = 'move-node-to-workspace 2'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace 3'
+# Join window with direction
+# 將窗口與指定方向的窗口合併
+cmd-shift-h = ['join-with left', 'mode main']
+cmd-shift-j = ['join-with down', 'mode main']
+cmd-shift-k = ['join-with up', 'mode main']
+cmd-shift-l = ['join-with right', 'mode main']
