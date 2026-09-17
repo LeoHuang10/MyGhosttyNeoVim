@@ -139,7 +139,7 @@ on-window-detected = [
     # Workspace 5 — Graphics / Game Development
     # 工作區 5 — 圖形 / 遊戲開發
     {
-        if = 'test %{app-bundle-id} = com.unity3d.unityhub',
+        if = 'test %{app-bundle-id} = org.blenderfoundation.blender',
         run = 'move-node-to-workspace 5',
     },
     {
@@ -147,7 +147,11 @@ on-window-detected = [
         run = 'move-node-to-workspace 5',
     },
     {
-        if = 'test %{app-bundle-id} = org.blenderfoundation.blender',
+        if = 'test %{app-bundle-id} = com.epicgames.EpicGamesLauncher',
+        run = 'move-node-to-workspace 5',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.unity3d.unityhub',
         run = 'move-node-to-workspace 5',
     },
 
