@@ -24,6 +24,7 @@
        workspaces          ; 工作區
 
        :editor
+       (evil +everywhere)  ; 啟用 Evil，默認 Evil Normal state
        file-templates      ; 文件模板
        fold                ; 代碼折疊
        snippets            ; 代碼片段
