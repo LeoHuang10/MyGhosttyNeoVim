@@ -73,3 +73,10 @@ end
 
 -- AI 補全集成到 blink.cmp
 vim.g.ai_cmp = true
+
+-- C3 文件類型檢測
+vim.filetype.add({
+  extension = {
+    c3 = "c3",
+  },
+})
