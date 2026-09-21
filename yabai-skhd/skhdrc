@@ -1,146 +1,127 @@
-#  NOTE(koekeishiya): A list of all built-in modifier and literal keywords can
-#                     be found at https://github.com/koekeishiya/skhd/issues/1
+# skhd 快捷鍵配置
+# 官方文檔：https://github.com/koekeishiya/skhd
 #
-#                     NOTE（koekeishiya）：所有內置修飾鍵和字面量關鍵字列表可參考上面的地址。
+# 快捷鍵語法規則：
+#   hotkey = <mode> '<' <action> | <action>
+#   keysym = <mod> '-' <key> | <key>
+#   使用 ';' 分隔多個命令
+#   使用 '->' 表示按鍵不被 skhd 消費
 #
-#                     A hotkey is written according to the following rules:
-#                     快捷鍵（Hotkey）按照以下規則編寫：
-#
-#                       hotkey       = <mode> '<' <action> | <action>
-#
-#                       mode         = 'name of mode' | <mode>
-#
-#                       action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
-#                                      <keysym> ':' <command>          | <keysym> '->' ':' <command>
-#                                      <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
-#
-#                       keysym       = <mod> '-' <key> | <key>
-#
-#                       mod          = 'modifier keyword' | <mod> '+' <mod>
-#
-#                       key          = <literal> | <keycode>
-#
-#                       literal      = 'single letter or built-in keyword'
-#
-#                       keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
-#
-#                       proc_map_lst = * <proc_map>
-#
-#                       proc_map     = <string> ':' <command> | <string>     '~' |
-#                                      '*'      ':' <command> | '*'          '~'
-#
-#                       string       = '"' 'sequence of characters' '"'
-#
-#                       command      = command is executed through '$SHELL -c' and
-#                                      follows valid shell syntax. if the $SHELL environment
-#                                      variable is not set, it will default to '/bin/bash'.
-#                                      when bash is used, the ';' delimeter can be specified
-#                                      to chain commands.
-#
-#                                      to allow a command to extend into multiple lines,
-#                                      prepend '\' at the end of the previous line.
-#
-#                                      an EOL character signifies the end of the bind.
-#
-#                       ->           = keypress is not consumed by skhd
-#
-#                       *            = matches every application not specified in <proc_map_lst>
-#
-#                       ~            = application is unbound and keypress is forwarded per usual, when specified in a <proc_map>
-#
-#  NOTE(koekeishiya): A mode is declared according to the following rules:
-#
-#                       mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
-#                                   '::' <name> '@'               | '::' <name>
-#
-#                       name      = desired name for this mode,
-#
-#                       @         = capture keypresses regardless of being bound to an action
-#
-#                       command   = command is executed through '$SHELL -c' and
-#                                      follows valid shell syntax. if the $SHELL environment
-#                                      variable is not set, it will default to '/bin/bash'.
-#                                      when bash is used, the ';' delimeter can be specified
-#                                      to chain commands.
-#
-#                                   to allow a command to extend into multiple lines,
-#                                   prepend '\' at the end of the previous line.
-#
-#                                   an EOL character signifies the end of the bind.
+# 完整修飾鍵列表：https://github.com/asmvik/skhd/issues/1
+# 支持：fn, cmd, lcmd, rcmd, shift, lshift, rshift, alt, lalt, ralt,
+#        ctrl, lctrl, rctrl, hyper, meh
 
-# add an on_enter command to the default mode
-# 為 default 模式添加 on_enter 命令
+# ============================================================
+# 默認模式（可選）
+# 使用 :: default 可以為默認模式定義 on_enter 命令
+# 當前保持註釋狀態
+# ============================================================
+
 # :: default : yabai -m config active_window_border_color 0xff775759
-#
-# defines a new mode 'test' with an on_enter command, that captures keypresses
-# 定義新的 test 模式，並使用 on_enter 命令捕獲按鍵
-# :: test @ : yabai -m config active_window_border_color 0xff24ccaa
-#
-# from 'default' mode, activate mode 'test'
-# 從 default 模式啟用 test 模式
-# cmd - x ; test
-#
-# from 'test' mode, activate mode 'default'
-# 從 test 模式返回 default 模式
-# test < cmd - x ; default
-#
-# launch a new terminal instance when in either 'default' or 'test' mode
-# 在 default 或 test 模式下啟動新的終端實例
-# default, test < cmd - return : open -na /Applications/Terminal.app
 
-# application specific bindings
-# 應用程序專用快捷鍵
-#
-# cmd - n [
-#     "kitty"       : echo "hello kitty"
-#     *             : echo "hello everyone"
-#     "qutebrowser" : echo "hello qutebrowser"
-#     "terminal"    ~
-#     "finder"      : false
-# ]
+# ============================================================
+# 切換到指定工作區
+# ============================================================
 
-# specify a file that should be included as an additional config-file.
-# 指定需要額外載入的配置文件。
-# treated as an absolutepath if the filename begins with '/' otherwise
-# 如果文件名以 '/' 開頭，則作為絕對路徑處理，否則相對於當前配置文件路徑。
-#
-# .load "/Users/Koe/.config/partial_skhdrc"
-# .load "partial_skhdrc"
-
-# prevent skhd from monitoring events for specific applications.
-# 阻止 skhd 監控指定應用程序的按鍵事件。
-#
-# .blacklist [
-#    "kitty"
-#    "terminal"
-#    "qutebrowser"
-# ]
-
-# Space 1～6
-# 切換到指定工作區（Space）
 cmd - 1 : yabai -m space --focus 1
 cmd - 2 : yabai -m space --focus 2
 cmd - 3 : yabai -m space --focus 3
 cmd - 4 : yabai -m space --focus 4
 cmd - 5 : yabai -m space --focus 5
 cmd - 6 : yabai -m space --focus 6
+cmd - 7 : yabai -m space --focus 7
+cmd - 8 : yabai -m space --focus 8
+cmd - 9 : yabai -m space --focus 9
+cmd - 0 : yabai -m space --focus 10
 
+# ============================================================
 # 將當前視窗移動到指定工作區
+# ============================================================
+
 cmd + shift - 1 : yabai -m window --space 1
 cmd + shift - 2 : yabai -m window --space 2
 cmd + shift - 3 : yabai -m window --space 3
 cmd + shift - 4 : yabai -m window --space 4
 cmd + shift - 5 : yabai -m window --space 5
 cmd + shift - 6 : yabai -m window --space 6
+cmd + shift - 7 : yabai -m window --space 7
+cmd + shift - 8 : yabai -m window --space 8
+cmd + shift - 9 : yabai -m window --space 9
+cmd + shift - 0 : yabai -m window --space 10
 
-# open terminal, blazingly fast compared to iTerm/Hyper
+# ============================================================
+# 窗口焦點切換（社區推薦）
+# 按方向切換當前聚焦的窗口
+# ============================================================
+
+cmd - h : yabai -m window --focus west
+cmd - j : yabai -m window --focus south
+cmd - k : yabai -m window --focus north
+cmd - l : yabai -m window --focus east
+
+# ============================================================
+# 窗口移動（社區推薦）
+# 將當前窗口按方向移動
+# ============================================================
+
+cmd + shift - h : yabai -m window --warp west
+cmd + shift - j : yabai -m window --warp south
+cmd + shift - k : yabai -m window --warp north
+cmd + shift - l : yabai -m window --warp east
+
+# ============================================================
+# 切換布局（社區推薦）
+# bsp：二叉空間分割（默認平鋪）
+# stack：堆疊模式
+# float：浮動模式
+# ============================================================
+
+cmd - slash : yabai -m config layout bsp
+cmd - comma : yabai -m config layout float
+
+# ============================================================
+# 窗口大小調整（社區推薦）
+# 使用 --resize 調整當前窗口大小
+# bottom_right:dx:dy 表示調整右下角，正數擴大，負數縮小
+# ============================================================
+
+cmd - minus : yabai -m window --resize bottom_right:-50:-50
+cmd - equal : yabai -m window --resize bottom_right:50:50
+
+# ============================================================
+# 全屏切換（社區推薦）
+# ============================================================
+
+cmd + shift - f : yabai -m window --toggle zoom-fullscreen
+
+# ============================================================
+# 浮動 / 平鋪切換（社區推薦）
+# ============================================================
+
+cmd + shift - space : yabai -m window --toggle float
+
+# ============================================================
+# 打開應用
+# ============================================================
+
 # 打開主力終端 Ghostty
 cmd - return : open -a /Applications/Ghostty.app
 
-# open qutebrowser
 # 打開 qutebrowser
 cmd + shift - return : ~/Scripts/qtb.sh
 
-# open mpv
 # 打開 mpv
 cmd - m : open -na /Applications/mpv.app $(pbpaste)
+
+# ============================================================
+# 應用特定綁定（社區推薦，可選）
+# 語法：<mod> - <key> [ "app_name" : command ; * : command ]
+# "app_name" 為空時表示不限應用
+# ~ 表示不綁定，將按鍵傳遞給應用
+# 當前保持註釋狀態，需要時再啟用
+# ============================================================
+
+# cmd - n [
+#     "kitty" : yabai -m window --focus west
+#     * : open -a /Applications/Ghostty.app
+# ]

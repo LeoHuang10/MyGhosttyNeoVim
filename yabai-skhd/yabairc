@@ -1,26 +1,29 @@
 #!/usr/bin/env sh
 
+# yabai 配置
+# 官方文檔：https://github.com/asmvik/yabai/wiki
 #
-# for this to work you must configure sudo such that
-# it will be able to run the command without password
+# 若要使用 scripting addition（腳本擴展），需配置 sudo 免密碼
+# 詳見：https://github.com/asmvik/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
 #
-# 要使此功能正常工作，你必须配置 sudo，使其能够在不输入密码的情况下
-# 执行相关命令。
-#
-# see this wiki page for information:
-# 查看以下 Wiki 页面获取相关信息：
-#  - https://github.com/asmvik/yabai/wiki/Installing-yabai-\(latest-release\)\#configure-scripting-addition
-#
+# 以下命令用於在 Dock 重新啟動後重新加載腳本擴展
 # yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 # sudo yabai --load-sa
 #
-# 上面的命令用于在 Dock 重新启动后重新加载 scripting addition（脚本扩展），
-# 以及手动加载 scripting addition。
-# 当前先保持官方模板中的注释状态，不主动启用。
-#
+# 當前保持註釋狀態，不主動啟用。
 
-# global settings
+# ============================================================
+# 調試輸出
+# 啟用後可查看日誌排查問題，正式使用時可關閉
+# 日誌位置：/tmp/yabai_$USER.err.log 和 /tmp/yabai_$USER.out.log
+# ============================================================
+
+# yabai -m config debug_output on
+
+# ============================================================
 # 全局設置
+# ============================================================
+
 yabai -m config \
     external_bar off:40:0 \
     menubar_opacity 1.0 \
@@ -54,15 +57,99 @@ yabai -m config \
     mouse_action2 resize \
     mouse_drop_action swap
 
-# window rules
-# 視窗規則
+# ============================================================
+# 窗口規則
+# 按 AeroSpace 工作區劃分，將應用程序自動分配到對應工作區
+# ============================================================
 
-# 應用程序工作區分配
-# 將指定應用程序自動分配到對應工作區
+# 工作區 1 — 瀏覽器
+yabai -m rule --add app="^Safari$" space=1
+yabai -m rule --add app="^Firefox$" space=1
+yabai -m rule --add app="^Google Chrome$" space=1
+
+# 工作區 2 — 終端
+# 排序優先級：Ghostty > cmux > Kitty > WezTerm > Alacritty
 yabai -m rule --add app="^Ghostty$" space=2
-yabai -m rule --add app="^Rider$" space=3
+yabai -m rule --add app="^cmux$" space=2
+yabai -m rule --add app="^kitty$" space=2
+yabai -m rule --add app="^WezTerm$" space=2
+yabai -m rule --add app="^Alacritty$" space=2
+
+# 工作區 3 — 開發
+# 排序優先級：neovide > Emacs > Xcode > JetBrains Air > JetBrains Rider > Zed > VSCode > Visual Studio Preview
+yabai -m rule --add app="^Neovide$" space=3
+yabai -m rule --add app="^Emacs$" space=3
+yabai -m rule --add app="^Xcode$" space=3
 yabai -m rule --add app="^Air$" space=3
-yabai -m rule --add app="^Gemini$" space=3
-yabai -m rule --add app="^ChatGPT$" space=3
+yabai -m rule --add app="^Rider$" space=3
+yabai -m rule --add app="^Zed$" space=3
+yabai -m rule --add app="^Code$" space=3
+yabai -m rule --add app="^Visual Studio$" space=3
+
+# 工作區 4 — AI
+yabai -m rule --add app="^Claude$" space=4
+yabai -m rule --add app="^Gemini$" space=4
+yabai -m rule --add app="^Codex$" space=4
+
+# 工作區 5 — 圖形 / 遊戲開發
+# 排序優先級：Blender > Godot > Epic Games Launcher > Unity Hub
+yabai -m rule --add app="^Blender$" space=5
+yabai -m rule --add app="^Godot$" space=5
+yabai -m rule --add app="^Epic Games Launcher$" space=5
+yabai -m rule --add app="^Unity Hub$" space=5
+
+# 工作區 6 — 文件管理
+yabai -m rule --add app="^Finder$" space=6
+yabai -m rule --add app="^Parallels Desktop$" space=6
+yabai -m rule --add app="^VirtualBox$" space=6
+yabai -m rule --add app="^Shadowrocket$" space=6
+
+# 工作區 7 — 開發協作 / 項目管理
+yabai -m rule --add app="^GitHub Desktop$" space=7
+
+# 工作區 8 — 開發 / 工程工具
+yabai -m rule --add app="^Instruments$" space=8
+
+# ============================================================
+# 信號處理（Signals）
+# 用於在特定事件發生時執行命令，比規則更靈活
+# 官方文檔：https://github.com/asmvik/yabai/wiki/Commands#signals
+# ============================================================
+
+# Dock 重啟後重新加載腳本擴展（需先配置 sudo 免密碼）
+# yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# 窗口創建時，如果應用不在規則中，可以在此添加額外邏輯
+# yabai -m signal --add event=window_created action="echo 'new window created'"
+
+# ============================================================
+# 腳本擴展（Scripting Addition）相關配置
+# 以下配置需要 sudo yabai --load-sa 才能生效
+# 當前保持註釋狀態，需要時再啟用
+# ============================================================
+
+# 窗口透明度控制
+# yabai -m config window_opacity on
+# yabai -m config active_window_opacity 1.0
+# yabai -m config normal_window_opacity 0.9
+
+# 窗口邊框控制
+# yabai -m config window_border on
+# yabai -m config window_border_width 2
+# yabai -m config active_window_border_color 0xff775759
+# yabai -m config normal_window_border_color 0xff555555
+
+# 鼠標修飾鍵
+# yabai -m config mouse_modifier fn
+# yabai -m config mouse_action1 move
+# yabai -m config mouse_action2 resize
+# yabai -m config mouse_drop_action swap
+
+# ============================================================
+# 立即應用規則到已存在的窗口
+# 這條命令必須放在所有 rule --add 之後
+# ============================================================
+
+yabai -m rule --apply
 
 echo "yabai configuration loaded.."
