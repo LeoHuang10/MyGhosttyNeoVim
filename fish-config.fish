@@ -3,10 +3,10 @@ set -gx LANG en_US.UTF-8
 set -gx CLICOLOR 1
 set -gx LSCOLORS ExGxBxDxCxEgEdxbxgxcxd
 
-# PATH 設置
-# 將 Homebrew LLVM 放在最前，優先使用新編譯器
-# 再添加 OpenJDK 的 bin 目錄
-set -gx PATH /opt/homebrew/opt/llvm/bin /opt/homebrew/opt/openjdk/bin $HOME/.cargo/bin $PATH
+# 使用 fish_add_path 自動去重，避免 PATH 重複
+fish_add_path /opt/homebrew/opt/llvm/bin
+fish_add_path /opt/homebrew/opt/openjdk/bin
+fish_add_path $HOME/.cargo/bin
 
 # JAVA_HOME
 set -gx JAVA_HOME /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home
@@ -50,7 +50,7 @@ function emacs
 end
 
 # 別名
-alias lg 'lazygit'
+alias lg lazygit
 alias godot-gd '/Applications/Godot.app/Contents/MacOS/Godot'
 alias godot-cs '/Applications/Godot_mono.app/Contents/MacOS/Godot'
 alias unity-hub "open -a 'Unity Hub'"

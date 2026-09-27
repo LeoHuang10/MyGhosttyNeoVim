@@ -57,12 +57,8 @@ function precmd() {
   echo -ne "\033]0;${PWD/#$HOME/~}\007"
 }
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 [ -f "/Users/huangshaoshuai/.ghcup/env" ] && . "/Users/huangshaoshuai/.ghcup/env" # ghcup-env
-
-# 使用 Homebrew LLVM 作為默認編譯器
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # 使用 Homebrew OpenJDK
 export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
