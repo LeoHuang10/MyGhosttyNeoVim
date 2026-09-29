@@ -1,0 +1,2 @@
+#!/bin/bash
+claude "根據以下 git diff 生成一條簡潔的提交信息（用英文）：$(git diff --cached)"
