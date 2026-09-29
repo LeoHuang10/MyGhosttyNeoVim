@@ -12,7 +12,7 @@ return {
 
   -- ==================== Godot (GDScript) ====================
   -- Godot syntax highlighting (long-term community maintenance)
-  -- Godot 語法高亮（社群長期維護）
+  -- Godot 語法高亮（社區長期維護）
   { "habamax/vim-godot", ft = "gdscript" },
 
   -- ==================== Note 註 ====================

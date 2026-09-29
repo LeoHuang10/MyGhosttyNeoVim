@@ -46,7 +46,7 @@ else
   set langmenu=zh_TW.utf-8
 endif
 
-command! SetCN call writefile(['language messages zh_CN.utf-8'], expand('~/.vimrc.local')) | execute 'language messages zh_CN.utf-8' | echo '已切换至简体中文界面，重启后保持'
+command! SetCN call writefile(['language messages zh_CN.utf-8'], expand('~/.vimrc.local')) | execute 'language messages zh_CN.utf-8' | echo '已切換至簡體中文界面，重啟後保持'
 command! SetTW call writefile(['language messages zh_TW.utf-8'], expand('~/.vimrc.local')) | execute 'language messages zh_TW.utf-8' | echo '已切換至繁體中文界面，重啟後保持'
 
 nnoremap <leader>zh :SetCN<CR>
