@@ -7,7 +7,7 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      -- 自動安裝的語言服務器清單（移除了 clangd，改用 Homebrew 版本）
+      -- 自動安裝的語言服務器列表（移除了 clangd，改用 Homebrew 版本）
       ensure_installed = {
         "rust_analyzer",
         "lua_ls",

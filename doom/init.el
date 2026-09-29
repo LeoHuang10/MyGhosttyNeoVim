@@ -1,16 +1,16 @@
 ;;; $DOOMDIR/init.el -*- lexical-binding: t; -*-
 
 ;; ============================================================
-;; Doom 模組配置
+;; Doom 模塊配置
 ;; ============================================================
 
-;; 修改模組配置後執行 `doom sync`。
+;; 修改模塊配置後執行 `doom sync`
 
 (doom! :input
 
        :completion
-       (corfu +orderless)  ; 現代補全選單與模糊匹配
-       vertico             ; 垂直補全選單
+       (corfu +orderless)  ; 現代補全菜單與模糊匹配
+       vertico             ; 垂直補全菜單
 
        :ui
        doom                ; Doom 核心外觀
@@ -18,7 +18,7 @@
        hl-todo             ; TODO/FIXME 高亮
        modeline            ; 狀態欄
        ophints             ; 操作提示
-       (popup +defaults)   ; 彈出視窗
+       (popup +defaults)   ; 彈出窗口
        (vc-gutter +pretty) ; Git 修改標記
        vi-tilde-fringe     ; 文件末尾標記
        workspaces          ; 工作區
@@ -54,7 +54,7 @@
 
        :lang
        (cc +lsp)           ; C / C++ LSP
-       ;; (c3 +lsp)         ; C3 LSP：官方模組支持後啟用
+       ;; (c3 +lsp)         ; C3 LSP：官方模塊支持後啟用
        (rust +lsp)         ; Rust LSP
        (swift +lsp)        ; Swift LSP
        (lua +lsp)          ; Lua LSP

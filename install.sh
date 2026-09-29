@@ -14,7 +14,7 @@ cp starship.toml ~/.config/
 
 # 4. 還原 Neovim 插件配置
 mkdir -p ~/.config/nvim/lua/plugins
-cp -r nvim-plugins/* ~/.config/nvim/lua/plugins/
+cp -r nvim-plugins/plugins/* ~/.config/nvim/lua/plugins/
 
 # 5. 還原 Neovim 自定義配置（若存在）
 if [ -d nvim-config/config ]; then

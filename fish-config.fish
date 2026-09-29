@@ -19,7 +19,7 @@ end
 # Starship 提示符
 starship init fish | source
 
-# fzf 模糊搜尋
+# fzf 模糊搜索
 if type -q fzf
     fzf --fish | source
 end

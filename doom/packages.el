@@ -4,5 +4,5 @@
 ;; Corfu 終端支持
 ;; ============================================================
 
-;; Emacs 30 的終端使用 corfu-terminal 顯示自動補全選單。
+;; Emacs 30 的終端使用 corfu-terminal 顯示自動補全菜單
 (package! corfu-terminal)

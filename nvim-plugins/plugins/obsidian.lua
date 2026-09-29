@@ -13,7 +13,7 @@ return {
       },
       keymaps = {
         ["<leader>od"] = { action = function() return ":ObsidianToday<CR>" end, desc = "打開今日日記" },
-        ["<leader>os"] = { action = function() return ":ObsidianSearch<CR>" end, desc = "搜尋筆記" },
+        ["<leader>os"] = { action = function() return ":ObsidianSearch<CR>" end, desc = "搜索筆記" },
         ["<leader>oq"] = { action = function() return ":ObsidianQuickSwitch<CR>" end, desc = "快速切換筆記" },
         ["<leader>ob"] = { action = function() return ":ObsidianBacklinks<CR>" end, desc = "查看反向鏈接" },
         ["<leader>on"] = { action = function() return ":ObsidianNew<CR>" end, desc = "創建新筆記" },

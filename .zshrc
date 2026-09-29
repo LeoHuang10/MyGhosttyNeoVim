@@ -22,7 +22,7 @@ export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 # 語法高亮樣式：無效命令顯示為白色
 ZSH_HIGHLIGHT_STYLES[incorrect-command]='fg=white'
 
-# fzf 模糊搜尋
+# fzf 模糊搜索
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zoxide 智能目錄跳轉
