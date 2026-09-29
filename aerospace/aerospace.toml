@@ -89,6 +89,10 @@ on-window-detected = [
     # Workspace 3 — Development
     # 工作區 3 — 開發
     {
+        if = 'test %{app-bundle-id} = org.vim.MacVim',
+        run = 'move-node-to-workspace 3',
+    },
+    {
         if = 'test %{app-bundle-id} = com.neovide.neovide',
         run = 'move-node-to-workspace 3',
     },
@@ -254,8 +258,8 @@ cmd-tab = 'workspace-back-and-forth'
 # 打開 Ghostty
 cmd-enter = 'exec-and-forget open -na /Applications/Ghostty.app'
 
-# Quick terminal
-# 快速終端
+# Open qutebrowser
+# 打開 qutebrowser
 cmd-shift-enter = 'exec-and-forget ~/Scripts/qtb.sh'
 
 # Open clipboard content with mpv
